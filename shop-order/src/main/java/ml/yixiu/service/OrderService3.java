@@ -1,2 +1,5 @@
-package ml.yixiu.service;public interface OrderService3 {
+package ml.yixiu.service;
+
+public interface OrderService3 {
+    void message();
 }

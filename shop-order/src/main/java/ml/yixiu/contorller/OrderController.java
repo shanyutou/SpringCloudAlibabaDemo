@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import ml.yixiu.domain.Order;
 import ml.yixiu.domain.Product;
 import ml.yixiu.service.OrderService;
+import ml.yixiu.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -15,27 +16,37 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-@RestController
+//@RestController
 @Slf4j
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
-    @Autowired
-    private RestTemplate restTemplate;
+//    @Autowired
+//    private RestTemplate restTemplate;
+//
+//    @Autowired
+//    private DiscoveryClient discoveryClient;
 
     @Autowired
-    private DiscoveryClient discoveryClient;
+    ProductService productService;
 
     @RequestMapping("/order/prod/{pid}")
     public Order order(@PathVariable("pid") Integer pid){
         log.info("order prod id: {}", pid);
 //        Product product = restTemplate.getForObject("http://localhost:8081/product/" + pid, Product.class);
         //修改为nacos注册中心获取服务
-        List<ServiceInstance> serviceInstances = discoveryClient.getInstances("service-product");
-        ServiceInstance instance = serviceInstances.get(0);
-        Product product = restTemplate.getForObject("http://"+instance.getHost()+":"+instance.getPort()+"/product/" + pid, Product.class);
+//        List<ServiceInstance> serviceInstances = discoveryClient.getInstances("service-product");
+//        int index = (int) (Math.random() * serviceInstances.size());
+//        ServiceInstance instance = serviceInstances.get(index);
+////        String url = "http://" + instance.getHost() + ":" + instance.getPort() + "/product/" + pid;
+//        String url = "http://" + "service-product" + "/product/" + pid;
+//
+//        log.info("url: {}", url);
+//        Product product = restTemplate.getForObject(url, Product.class);
+
+        Product product = productService.findById(pid);
 
         log.info("product: {}", JSON.toJSONString(product));
         Order order = new Order();

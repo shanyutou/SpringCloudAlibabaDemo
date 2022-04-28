@@ -1,5 +1,7 @@
 server:
     port: 8071
+    tomcat:
+        max-threads: 10
 spring:
   application:
     name: service-order
@@ -18,3 +20,12 @@ spring:
       nacos:
         discovery:
           server-addr: localhost:8848
+        inetutils:
+          preferred-networks[0]: 192.168.2.
+      sentinel:
+        transport:
+            dashboard: localhost:8718 # 指定控制台服务的地址
+
+service-product:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
