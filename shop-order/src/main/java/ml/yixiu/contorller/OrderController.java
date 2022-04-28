@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-//@RestController
+@RestController
 @Slf4j
 public class OrderController {
 
@@ -49,6 +49,13 @@ public class OrderController {
         Product product = productService.findById(pid);
 
         log.info("product: {}", JSON.toJSONString(product));
+
+        if (product.getPid() == -1) {
+            Order order = new Order();
+            order.setPname("下单失败");
+            return order;
+        }
+
         Order order = new Order();
 //        order.setUid(1);
         order.setUsername("测试用户");

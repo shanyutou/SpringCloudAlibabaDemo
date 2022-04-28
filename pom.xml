@@ -12,6 +12,7 @@
         <module>shop-order</module>
         <module>shop-product</module>
         <module>shop-user</module>
+        <module>api-gateway</module>
     </modules>
     <packaging>pom</packaging>
 
