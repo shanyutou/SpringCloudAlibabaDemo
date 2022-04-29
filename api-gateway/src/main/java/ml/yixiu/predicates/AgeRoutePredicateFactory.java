@@ -27,10 +27,6 @@ public class AgeRoutePredicateFactory extends AbstractRoutePredicateFactory<AgeR
         return Arrays.asList("minAge", "maxAge");
     }
 
-//    @Override
-//    public Predicate<ServerWebExchange> apply(Consumer<Config> consumer) {
-//        return super.apply(consumer);
-//    }
 
     //断言
     @Override
@@ -49,11 +45,7 @@ public class AgeRoutePredicateFactory extends AbstractRoutePredicateFactory<AgeR
     }
 
     @Data
-    @AllArgsConstructor
-    class Config {
-        public Config(){
-
-        }
+    static class Config {
         private int minAge;
         private int maxAge;
 
